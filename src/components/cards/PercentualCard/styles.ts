@@ -2,13 +2,14 @@ import { ArrowUpRight } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export type ButtonIconStyledProps = {
+export type PercentualCardStyleProps = {
   indiet?: boolean
 }
 
-export const Container = styled.View<ButtonIconStyledProps>`
+export const Container = styled.View<PercentualCardStyleProps>`
   position: relative;
   align-items: center;
+  gap: 2px;
 
   margin-top: 32px;
   margin-bottom: 40px;
@@ -44,7 +45,7 @@ export const Button = styled(TouchableOpacity)`
   right: 8px;
 `
 
-export const Icon = styled(ArrowUpRight).attrs<ButtonIconStyledProps>(({ theme, indiet }) => ({
+export const Icon = styled(ArrowUpRight).attrs<PercentualCardStyleProps>(({ theme, indiet }) => ({
   size: 24,
   color: indiet ? theme.COLORS["green-dark"] : theme.COLORS["red-dark"]
 }))``

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, type ButtonIconStyledProps, Container, Icon, SubTitle, Title } from "./styles";
+import { Button, Container, Icon, type PercentualCardStyleProps, SubTitle, Title } from "./styles";
 
-type Props = ButtonIconStyledProps
+type Props = PercentualCardStyleProps
 
 export function PercentualCard({ indiet = false }: Props){
   const navigate = useNavigation()
