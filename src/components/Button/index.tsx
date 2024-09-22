@@ -1,20 +1,27 @@
-import { type ButtonStyleProps, Container, PencilIcon, PlusIcon, Title, TrashIcon } from "./styles";
+import type { TouchableOpacityProps } from "react-native";
 
-type Props = {
+import {
+	type ButtonStyleProps,
+	Container,
+	PencilIcon,
+	PlusIcon,
+	Title,
+	TrashIcon,
+} from "./styles";
+
+type Props = TouchableOpacityProps & {
 	icon?: "PLUS" | "PENCIL" | "TRASH";
 	type?: ButtonStyleProps;
 };
 
-export function Button({ icon = undefined, type = "PRIMARY" }: Props) {
+export function Button({ icon = undefined, type = "PRIMARY", ...rest }: Props) {
 	return (
-		<Container type={type}>
+		<Container type={type} {...rest}>
 			{icon === "PLUS" && <PlusIcon />}
-      {icon === "TRASH" && <TrashIcon />}
-      {icon === "PENCIL" && <PencilIcon />}
+			{icon === "TRASH" && <TrashIcon />}
+			{icon === "PENCIL" && <PencilIcon />}
 
-			<Title type={type}>
-        Nova refeição
-      </Title>
+			<Title type={type}>Nova refeição</Title>
 		</Container>
 	);
 }

@@ -2,7 +2,7 @@ import { Circle } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export type CircleIconProps = {
+export type CircleIconStyleProps = {
   indiet?: boolean
 }
 
@@ -52,7 +52,7 @@ export const Name = styled.Text`
   `}
 `
 
-export const CircleIcon = styled(Circle).attrs<CircleIconProps>(({ theme, indiet }) => ({
+export const CircleIcon = styled(Circle).attrs<CircleIconStyleProps>(({ theme, indiet }) => ({
   size: 18,
   weight: "fill",
   color: indiet ? theme.COLORS["green-mid"] : theme.COLORS["red-mid"]

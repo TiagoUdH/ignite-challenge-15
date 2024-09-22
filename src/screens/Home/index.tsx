@@ -2,13 +2,14 @@ import { Button } from "@components/Button";
 import { Item } from "@components/Item";
 import { PercentualCard } from "@components/cards/PercentualCard";
 import { HeaderHome } from "@components/headers/HeaderHome";
+import { useNavigation } from "@react-navigation/native";
 import { SectionList, View } from "react-native";
 import { Container, NewMealTitle, SectionTitle } from "./styles";
 
 const DATA = [
   {
     title: '21.09.24',
-    data: ['Salsicha que sobrou do dogão', 'Macarronada', 'Pizza', 'a'],
+    data: ['Salsicha que sobrou do dogão', 'Macarronada', 'Pizza'],
   },
   {
     title: '20.09.24',
@@ -16,8 +17,13 @@ const DATA = [
   },
 ];
 
-
 export function Home(){
+  const navigation = useNavigation()
+
+  function handleNewMeal(){
+    navigation.navigate("newMeal")
+  }
+
   return (
     <Container>
       <HeaderHome />
@@ -29,7 +35,10 @@ export function Home(){
       <View>
         <NewMealTitle>Refeições</NewMealTitle>
 
-        <Button icon="PLUS" />
+        <Button
+          icon="PLUS"
+          onPress={handleNewMeal}
+        />
       </View>
 
       <SectionList
