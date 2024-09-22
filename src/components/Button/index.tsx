@@ -10,18 +10,19 @@ import {
 } from "./styles";
 
 type Props = TouchableOpacityProps & {
+	title: string;
 	icon?: "PLUS" | "PENCIL" | "TRASH";
 	type?: ButtonStyleProps;
 };
 
-export function Button({ icon = undefined, type = "PRIMARY", ...rest }: Props) {
+export function Button({ title, icon = undefined, type = "PRIMARY", ...rest }: Props) {
 	return (
 		<Container type={type} {...rest}>
 			{icon === "PLUS" && <PlusIcon />}
 			{icon === "TRASH" && <TrashIcon />}
 			{icon === "PENCIL" && <PencilIcon />}
 
-			<Title type={type}>Nova refeição</Title>
+			<Title type={type}>{title}</Title>
 		</Container>
 	);
 }

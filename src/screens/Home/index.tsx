@@ -36,6 +36,7 @@ export function Home(){
         <NewMealTitle>Refeições</NewMealTitle>
 
         <Button
+          title="Nova refeição"
           icon="PLUS"
           onPress={handleNewMeal}
         />
