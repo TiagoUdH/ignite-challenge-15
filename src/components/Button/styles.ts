@@ -25,7 +25,7 @@ export const Container = styled(TouchableOpacity).attrs<Props>({
   align-items: center;
   gap: 12px;
 
-  padding: 16px;
+  padding: 16px 24px;
   background-color: ${({ theme, type, isActive }) => isActive && type === "PRIMARY" ? theme.COLORS["gray-1"] : !isActive && type === "PRIMARY" ? theme.COLORS["gray-2"] : isActive ? theme.COLORS["gray-5"] : "transparent"};
   border-radius: 6px;
 

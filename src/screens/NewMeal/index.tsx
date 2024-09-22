@@ -5,9 +5,10 @@ import { HeaderForm } from "@components/headers/HeaderForm"
 import React, { useRef, useState } from "react"
 import { TextInput, TouchableOpacity, View } from "react-native"
 import { Container, Content, Form, InputGroup, Label } from "./styles"
+import { useNavigation } from "@react-navigation/native"
 
 export function NewMeal(){
-  const [isActive, setIsActive] = useState < React.RefObject<TextInput> | React.RefObject<TouchableOpacity> | null>(null)
+  const [isActive, setIsActive] = useState <React.RefObject<TextInput> | React.RefObject<TouchableOpacity> | null>(null)
 
   const [inDiet, setIndiet] = useState(true)
 
@@ -16,6 +17,12 @@ export function NewMeal(){
   const dateInputRef = useRef<TextInput>(null)
   const hourInputRef = useRef<TextInput>(null)
   const buttonRef = useRef<TouchableOpacity>(null)
+
+  const navigation = useNavigation()
+
+  function handleSuccess(){
+    navigation.navigate("success", { inDiet })
+  }
 
   return (
     <Container>
@@ -48,6 +55,7 @@ export function NewMeal(){
           title="Cadastrar refeição"
           buttonRef={buttonRef}
           isActive={isActive === buttonRef}
+          onPress={handleSuccess}
           onPressIn={() => setIsActive(buttonRef)}
           onPressOut={() => setIsActive(null)}
         />
