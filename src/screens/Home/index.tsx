@@ -3,6 +3,7 @@ import { Item } from "@components/Item";
 import { PercentualCard } from "@components/cards/PercentualCard";
 import { HeaderHome } from "@components/headers/HeaderHome";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { SectionList, View } from "react-native";
 import { Container, NewMealTitle, SectionTitle } from "./styles";
 
@@ -18,6 +19,8 @@ const DATA = [
 ];
 
 export function Home(){
+  const [isActive, setIsActive] = useState(false)
+
   const navigation = useNavigation()
 
   function handleNewMeal(){
@@ -39,6 +42,9 @@ export function Home(){
           title="Nova refeição"
           icon="PLUS"
           onPress={handleNewMeal}
+          isActive={isActive}
+          onPressIn={() => setIsActive(true)}
+          onPressOut={() => setIsActive(false)}
         />
       </View>
 

@@ -2,14 +2,23 @@ import { PencilSimpleLine, Plus, Trash } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export type ButtonStyleProps = "PRIMARY" | "SECONDARY"
+export type TextStyleProps = "PRIMARY" | "SECONDARY"
 
-type Props = {
-  type: ButtonStyleProps
+type TextProps = {
+  type: TextStyleProps
+}
+
+export type ButtonStyleProps = {
+  type?: TextStyleProps,
+  isActive?: boolean,
+}
+
+type Props = TextProps & {
+  isActive: boolean,
 }
 
 export const Container = styled(TouchableOpacity).attrs<Props>({
-  activeOpacity: 0.7,
+  activeOpacity: 1,
 })`
   flex-direction: row;
   justify-content: center;
@@ -17,7 +26,7 @@ export const Container = styled(TouchableOpacity).attrs<Props>({
   gap: 12px;
 
   padding: 16px;
-  background-color: ${({ theme, type }) => type === "PRIMARY" ? theme.COLORS["gray-2"] : theme.COLORS["gray-7"]};
+  background-color: ${({ theme, type, isActive }) => isActive && type === "PRIMARY" ? theme.COLORS["gray-1"] : !isActive && type === "PRIMARY" ? theme.COLORS["gray-2"] : isActive ? theme.COLORS["gray-5"] : "transparent"};
   border-radius: 6px;
 
   ${({ theme, type }) => type === "SECONDARY" && css`
@@ -42,7 +51,7 @@ export const TrashIcon = styled(Trash).attrs(({theme}) => ({
   color: theme.COLORS["gray-1"],
 }))``
 
-export const Title = styled.Text<Props>`
+export const Title = styled.Text<TextProps>`
   ${({ theme, type }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.SM}px;

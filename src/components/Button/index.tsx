@@ -1,5 +1,6 @@
-import type { TouchableOpacityProps } from "react-native";
+import type { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
+import React from "react";
 import {
 	type ButtonStyleProps,
 	Container,
@@ -9,15 +10,15 @@ import {
 	TrashIcon,
 } from "./styles";
 
-type Props = TouchableOpacityProps & {
+type Props = TouchableOpacityProps & ButtonStyleProps & {
 	title: string;
 	icon?: "PLUS" | "PENCIL" | "TRASH";
-	type?: ButtonStyleProps;
+	buttonRef?: React.RefObject<TouchableOpacity>
 };
 
-export function Button({ title, icon = undefined, type = "PRIMARY", ...rest }: Props) {
+export function Button({ title, buttonRef, icon = undefined, type = "PRIMARY", isActive = false, ...rest }: Props) {
 	return (
-		<Container type={type} {...rest}>
+		<Container type={type} isActive={isActive} ref={buttonRef} {...rest}>
 			{icon === "PLUS" && <PlusIcon />}
 			{icon === "TRASH" && <TrashIcon />}
 			{icon === "PENCIL" && <PencilIcon />}
