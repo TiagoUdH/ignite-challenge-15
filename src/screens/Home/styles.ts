@@ -18,6 +18,10 @@ export const NewMealTitle = styled.Text`
   margin-bottom: 8px;
 `
 
+export const Separator = styled.View`
+  height: 32px;
+`
+
 export const SectionTitle = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
@@ -25,6 +29,4 @@ export const SectionTitle = styled.Text`
     color: ${theme.COLORS["gray-1"]};
     line-height: ${theme.FONT_SIZE.LG * 1.3}px;
   `}
-
-  margin-top: 32px;
 `

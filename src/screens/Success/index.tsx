@@ -1,18 +1,15 @@
 import { Button } from "@components/Button";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useState } from "react";
 import { Container, Hero, Highlight, Message, Title } from "./styles";
 
-import inDietImg from "@assets/in-diet.png"
-import outDietImg from "@assets/out-diet.png"
+import inDietImg from "@assets/in-diet.png";
+import outDietImg from "@assets/out-diet.png";
 
 type RouteParams = {
   inDiet: boolean
 }
 
 export function Success() {
-  const [isActive, setIsActive] = useState(false)
-
   const navigation = useNavigation()
   const route = useRoute()
   const { inDiet } = route.params as RouteParams
@@ -43,10 +40,7 @@ export function Success() {
 
       <Button
         title="Ir para a página inicial"
-        isActive={isActive}
         onPress={handleHome}
-        onPressIn={() => setIsActive(true)}
-        onPressOut={() => setIsActive(false)}
       />
     </Container>
   )

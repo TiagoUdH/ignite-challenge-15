@@ -1,6 +1,6 @@
-import type { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import type { TouchableOpacityProps } from "react-native";
 
-import React from "react";
+import React, { useState } from "react";
 import {
 	type ButtonStyleProps,
 	Container,
@@ -13,12 +13,13 @@ import {
 type Props = TouchableOpacityProps & ButtonStyleProps & {
 	title: string;
 	icon?: "PLUS" | "PENCIL" | "TRASH";
-	buttonRef?: React.RefObject<TouchableOpacity>
 };
 
-export function Button({ title, buttonRef, icon = undefined, type = "PRIMARY", isActive = false, ...rest }: Props) {
+export function Button({ title, icon = undefined, type = "PRIMARY", ...rest }: Props) {
+	const [isActive, setIsActive] = useState(false)
+
 	return (
-		<Container type={type} isActive={isActive} ref={buttonRef} {...rest}>
+		<Container type={type} onPressIn={() => setIsActive(true)} onPressOut={() => setIsActive(false)} isActive={isActive} {...rest}>
 			{icon === "PLUS" && <PlusIcon />}
 			{icon === "TRASH" && <TrashIcon />}
 			{icon === "PENCIL" && <PencilIcon />}

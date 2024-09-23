@@ -10,7 +10,6 @@ type TextProps = {
 
 export type ButtonStyleProps = {
   type?: TextStyleProps,
-  isActive?: boolean,
 }
 
 type Props = TextProps & {
