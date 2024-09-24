@@ -1,9 +1,13 @@
 import { Button } from "@components/Button";
 import { Item } from "@components/Item";
+import { Loading } from "@components/Loading";
 import { PercentualCard } from "@components/cards/PercentualCard";
 import { HeaderHome } from "@components/headers/HeaderHome";
 import { useNavigation } from "@react-navigation/native";
-import { SectionList, View } from "react-native";
+import { SectionsDTO } from "@storage/sections/SectionsDTO";
+import { sectionsGetAll } from "@storage/sections/sectionsGetAll";
+import { useEffect, useState } from "react";
+import { Alert, SectionList, View } from "react-native";
 import { Container, NewMealTitle, SectionTitle, Separator } from "./styles";
 
 const DATA = [
@@ -18,11 +22,34 @@ const DATA = [
 ];
 
 export function Home(){
+  const [isLoading, setIsLoading] = useState(true)
+  const [sections, setSections] = useState<SectionsDTO>([])
+
   const navigation = useNavigation()
 
   function handleNewMeal(){
     navigation.navigate("newMeal")
   }
+
+  async function fetchSections(){
+    try{
+      setIsLoading(true)
+
+      const data = await sectionsGetAll()
+
+      setSections(data)
+    }
+    catch(error){
+      Alert.alert("Refeições", "Não foi possível carregar as refeições")
+    }
+    finally{
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchSections()
+  }, [])
 
   return (
     <Container>
@@ -42,19 +69,22 @@ export function Home(){
         />
       </View>
 
-      <Separator />
+      {isLoading ? <Loading /> : (
+        <>
+          <Separator />
 
-      <SectionList
-        sections={DATA}
-        renderSectionHeader={({ section: { title } }) => (
-          <SectionTitle>12.08.22</SectionTitle>
-        )}
-        renderItem={({ item }) => (
-          <Item />
-        )}
-        renderSectionFooter={() => <Separator />}
-        showsVerticalScrollIndicator={false}
-      />
+          <SectionList
+            sections={sections}
+            renderSectionHeader={({ section: { title } }) => (
+              <SectionTitle>{title}</SectionTitle>
+            )}
+            renderItem={({ item }) => (
+              <Item meal={item} />
+            )}
+            renderSectionFooter={() => <Separator />}
+            showsVerticalScrollIndicator={false}
+          /></>
+      )}
     </Container>
   )
 }

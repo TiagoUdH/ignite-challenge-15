@@ -1,17 +1,21 @@
-import { View } from "react-native";
+import { MealDTO } from "@storage/meal/MealDTO";
 import { CircleIcon, Container, Hour, Meal, Name, Separator } from "./styles";
 
-export function Item(){
+type Props = {
+  meal: MealDTO
+}
+
+export function Item({ meal: { hour, name, inDiet } }: Props){
   return (
     <Container>
-      <Hour>20:00</Hour>
+      <Hour>{hour}</Hour>
 
       <Separator />
       
       <Meal>
-        <Name>X-tudo</Name>
+        <Name>{name}</Name>
 
-        <CircleIcon indiet />
+        <CircleIcon indiet={inDiet} />
       </Meal>
     </Container>
   )
