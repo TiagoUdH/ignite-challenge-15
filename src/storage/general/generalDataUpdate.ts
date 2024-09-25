@@ -18,6 +18,7 @@ export async function generalDataUpdate(meal: MealDTO) {
   }
   else{
     storedGeneralData.outDietAmount++;
+    storedGeneralData.currentStreak = 0;
   }
 
   storedGeneralData.inDietPercentage = storedGeneralData.inDietAmount / storedGeneralData.mealAmount * 100;

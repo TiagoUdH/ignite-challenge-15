@@ -88,6 +88,7 @@ export function Home(){
 
           <SectionList
             sections={sections}
+            keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
               <SectionTitle>{title}</SectionTitle>
             )}

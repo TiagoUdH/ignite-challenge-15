@@ -12,7 +12,7 @@ export async function mealCreate(title: string, meal: MealDTO) {
   const titleExists = storedSections.find(section => section.title === titleFormatted)
 
   if(titleExists){
-    storedSections.map(section => {
+    const updatedSections = storedSections.map(section => {
       if (section.title === titleFormatted){
         return {
           ...section,
@@ -23,7 +23,7 @@ export async function mealCreate(title: string, meal: MealDTO) {
       return section
     })
 
-    const storage = JSON.stringify(storedSections)
+    const storage = JSON.stringify(updatedSections)
 
     await AsyncStorage.setItem(SECTIONS_COLLECTION, storage)
   }
@@ -36,7 +36,7 @@ export async function mealCreate(title: string, meal: MealDTO) {
     const storage = JSON.stringify([item, ...storedSections])
 
     await AsyncStorage.setItem(SECTIONS_COLLECTION, storage)
-
-    await generalDataUpdate(meal)
   }
+
+  await generalDataUpdate(meal)
 }
