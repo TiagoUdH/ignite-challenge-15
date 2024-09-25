@@ -2,7 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { GENERAL_DATA_COLLECTION } from "@storage/storageConfig"
 import { GeneralDataDTO } from "./GeneralDataDTO"
 
-const defaultData = {
+const defaultData: GeneralDataDTO = {
+  inDiet: false,
   inDietPercentage: 0,
   currentStreak: 0,
   bestStreak: 0,

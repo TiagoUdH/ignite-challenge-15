@@ -1,22 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Container, Icon, type PercentualCardStyleProps, SubTitle, Title } from "./styles";
+import { Button, Container, Icon, SubTitle, Title } from "./styles";
+import { GeneralDataDTO } from "@storage/general/GeneralDataDTO";
 
-type Props = PercentualCardStyleProps
+type Props = {
+  generalData: GeneralDataDTO;
+}
 
-export function PercentualCard({ indiet = false }: Props){
+export function PercentualCard({ generalData }: Props){
   const navigate = useNavigation()
 
   function handleStatistics(){
-    navigate.navigate("statistics")
+    navigate.navigate("statistics", { generalData })
   }
 
   return(
-    <Container indiet={indiet}>
+    <Container indiet={generalData.inDiet}>
       <Button onPress={handleStatistics}>
-        <Icon indiet={indiet} />
+        <Icon indiet={generalData.inDiet} />
       </Button>
 
-      <Title>90,86%</Title>
+      <Title>{generalData.inDietPercentage.toFixed(2).replace(".", ",")}%</Title>
 
       <SubTitle>das refeições dentro da dieta</SubTitle>
     </Container>

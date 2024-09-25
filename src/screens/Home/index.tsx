@@ -3,26 +3,18 @@ import { Item } from "@components/Item";
 import { Loading } from "@components/Loading";
 import { PercentualCard } from "@components/cards/PercentualCard";
 import { HeaderHome } from "@components/headers/HeaderHome";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { GeneralDataDTO } from "@storage/general/GeneralDataDTO";
+import { generalDataGet } from "@storage/general/generalDataGet";
 import { SectionsDTO } from "@storage/sections/SectionsDTO";
 import { sectionsGetAll } from "@storage/sections/sectionsGetAll";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Alert, SectionList, View } from "react-native";
 import { Container, NewMealTitle, SectionTitle, Separator } from "./styles";
 
-const DATA = [
-  {
-    title: '21.09.24',
-    data: ['Salsicha que sobrou do dogão', 'Macarronada', 'Pizza'],
-  },
-  {
-    title: '20.09.24',
-    data: ['Arroz', 'Pastel de Calabresa', '5 Kg de Frango', 'Carne que sobrou do churras'],
-  },
-];
-
 export function Home(){
   const [isLoading, setIsLoading] = useState(true)
+  const [generalData, setGeneralData] = useState<GeneralDataDTO>({} as GeneralDataDTO)
   const [sections, setSections] = useState<SectionsDTO>([])
 
   const navigation = useNavigation()
@@ -31,11 +23,28 @@ export function Home(){
     navigation.navigate("newMeal")
   }
 
+  async function fetchGeneralData() {
+    try {
+      setIsLoading(true)
+
+      const data = await generalDataGet()
+      
+      setGeneralData(data)
+    }
+    catch (error) {
+      Alert.alert("Dados gerais", "Não foi possível carregar os dados gerais")
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
   async function fetchSections(){
     try{
       setIsLoading(true)
 
       const data = await sectionsGetAll()
+
 
       setSections(data)
     }
@@ -47,17 +56,21 @@ export function Home(){
     }
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
+    fetchGeneralData()
     fetchSections()
-  }, [])
+  }, []))
 
   return (
     <Container>
       <HeaderHome />
 
-      <PercentualCard
-        indiet
-      />
+      {isLoading ? <Loading /> : (
+        <PercentualCard
+          generalData={generalData}
+        />
+        )
+      }
 
       <View>
         <NewMealTitle>Refeições</NewMealTitle>
@@ -83,7 +96,8 @@ export function Home(){
             )}
             renderSectionFooter={() => <Separator />}
             showsVerticalScrollIndicator={false}
-          /></>
+          />
+        </>
       )}
     </Container>
   )

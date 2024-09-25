@@ -3,14 +3,20 @@ import { Checkbox } from "@components/Checkbox"
 import { Input } from "@components/Input"
 import { HeaderForm } from "@components/headers/HeaderForm"
 import { useNavigation } from "@react-navigation/native"
+import { MealDTO } from "@storage/meal/MealDTO"
+import { mealCreate } from "@storage/meal/mealCreate"
 import React, { useRef, useState } from "react"
-import { TextInput, View } from "react-native"
+import { Alert, TextInput, View } from "react-native"
 import { Container, Content, Form, InputGroup, Label } from "./styles"
 
 export function NewMeal(){
-  const [isActive, setIsActive] = useState <React.RefObject<TextInput> | null>(null)
-
+  const [name, setName] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [data, setData] = useState<string>('')
+  const [hour, setHour] = useState<string>('')
   const [inDiet, setIndiet] = useState(true)
+
+  const [isActive, setIsActive] = useState <React.RefObject<TextInput> | null>(null)
 
   const nameInputRef = useRef<TextInput>(null)
   const descriptionInputRef = useRef<TextInput>(null)
@@ -19,8 +25,27 @@ export function NewMeal(){
 
   const navigation = useNavigation()
 
-  function handleSuccess(){
-    navigation.navigate("success", { inDiet })
+  async function handleSuccess(){
+    try{
+      if (name.trim().length === 0 || description.trim().length === 0 || data.trim().length === 0 || hour.trim().length === 0){
+        return Alert.alert("Nova Refeição", "Informe todos os dados.")
+      }
+
+      const meal: MealDTO = {
+        id: new Date().toISOString(),
+        name,
+        description,
+        hour,
+        inDiet,
+      }
+
+      await mealCreate(data, meal)
+
+      navigation.navigate("success", { inDiet })
+    }
+    catch(error){
+      Alert.alert("Nova Refeição", "Não foi possível criar uma nova refeição.")
+    }
   }
 
   return (
@@ -29,14 +54,14 @@ export function NewMeal(){
 
       <Content>
         <Form>
-          <Input isActive={nameInputRef === isActive} inputRef={nameInputRef} onFocus={() => setIsActive(nameInputRef)} onBlur={() => setIsActive(null)} label="Nome" />
+          <Input value={name} onChangeText={setName} isActive={nameInputRef === isActive} inputRef={nameInputRef} onFocus={() => setIsActive(nameInputRef)} onBlur={() => setIsActive(null)} label="Nome" />
 
-          <Input isActive={descriptionInputRef === isActive} inputRef={descriptionInputRef} onFocus={() => setIsActive(descriptionInputRef)} onBlur={() => setIsActive(null)} label="Descrição" multiline numberOfLines={5} textAlignVertical="top" />
+          <Input value={description} onChangeText={setDescription} isActive={descriptionInputRef === isActive} inputRef={descriptionInputRef} onFocus={() => setIsActive(descriptionInputRef)} onBlur={() => setIsActive(null)} label="Descrição" multiline numberOfLines={5} textAlignVertical="top" />
 
           <InputGroup>
-            <Input isActive={dateInputRef === isActive} inputRef={dateInputRef} onFocus={() => setIsActive(dateInputRef)} onBlur={() => setIsActive(null)} label="Data" inInputGroup />
+            <Input value={data} onChangeText={setData} isActive={dateInputRef === isActive} inputRef={dateInputRef} onFocus={() => setIsActive(dateInputRef)} onBlur={() => setIsActive(null)} label="Data" inInputGroup />
 
-            <Input isActive={hourInputRef === isActive} inputRef={hourInputRef} onFocus={() => setIsActive(hourInputRef)} onBlur={() => setIsActive(null)} label="Hora" inInputGroup />
+            <Input value={hour} onChangeText={setHour} isActive={hourInputRef === isActive} inputRef={hourInputRef} onFocus={() => setIsActive(hourInputRef)} onBlur={() => setIsActive(null)} label="Hora" inInputGroup />
           </InputGroup>
 
           <View>
