@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { generalDataUpdate } from "@storage/general/generalDataUpdate";
 import { sectionsGetAll } from "@storage/sections/sectionsGetAll";
+import { sequenceAfterNewMeal } from "@storage/sequence/sequenceAfterNewMeal";
 import { SECTIONS_COLLECTION } from "@storage/storageConfig";
 import { MealDTO } from "./MealDTO";
 
@@ -38,5 +39,6 @@ export async function mealCreate(title: string, meal: MealDTO) {
     await AsyncStorage.setItem(SECTIONS_COLLECTION, storage)
   }
 
-  await generalDataUpdate(meal)
+  await generalDataUpdate(meal.inDiet)
+  await sequenceAfterNewMeal(meal.id, meal.inDiet)
 }

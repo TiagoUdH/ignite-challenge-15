@@ -1,14 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MealDTO } from "@storage/meal/MealDTO";
 import { GENERAL_DATA_COLLECTION } from "@storage/storageConfig";
 import { generalDataGet } from "./generalDataGet";
 
-export async function generalDataUpdate(meal: MealDTO) {
+export async function generalDataUpdate(inDiet: boolean) {
   const storedGeneralData = await generalDataGet()
 
   storedGeneralData.mealAmount++;
   
-  if(meal.inDiet) {
+  if(inDiet) {
     storedGeneralData.inDietAmount++;
     storedGeneralData.currentStreak++;
 
