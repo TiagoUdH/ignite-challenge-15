@@ -92,8 +92,8 @@ export function Home(){
             renderSectionHeader={({ section: { title } }) => (
               <SectionTitle>{title}</SectionTitle>
             )}
-            renderItem={({ item }) => (
-              <Item meal={item} />
+            renderItem={({ item, section: { title } }) => (
+              <Item date={title} meal={item} />
             )}
             renderSectionFooter={() => <Separator />}
             showsVerticalScrollIndicator={false}

@@ -1,4 +1,5 @@
 import { GeneralDataDTO } from "@storage/general/GeneralDataDTO";
+import { MealDTO } from "@storage/meal/MealDTO";
 
 export declare global {
     namespace ReactNavigation {
@@ -11,6 +12,10 @@ export declare global {
             success: {
                 inDiet: boolean;
             };
+            meal: {
+                date: string;
+                meal: MealDTO;
+            }
         }
     }
 }
