@@ -1,7 +1,7 @@
-import { sequenceStreaksGet } from "@storage/sequence/sequenceStreaksGet";
-import { generalDataGet } from "./generalDataGet";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { sequenceStreaksGet } from "@storage/sequence/sequenceStreaksGet";
 import { GENERAL_DATA_COLLECTION } from "@storage/storageConfig";
+import { generalDataGet } from "./generalDataGet";
 
 export async function generalDataBeforeEditMeal(inDietBefore: boolean, inDietAfter: boolean) {
   try{
@@ -22,7 +22,7 @@ export async function generalDataBeforeEditMeal(inDietBefore: boolean, inDietAft
       generalDatastored.outDietAmount++;
     }
 
-    generalDatastored.inDietPercentage = generalDatastored.inDietAmount / generalDatastored.mealAmount;
+    generalDatastored.inDietPercentage = generalDatastored.inDietAmount / generalDatastored.mealAmount * 100;
     generalDatastored.inDiet = generalDatastored.inDietAmount > generalDatastored.outDietAmount;
 
     await AsyncStorage.setItem(GENERAL_DATA_COLLECTION, JSON.stringify(generalDatastored))

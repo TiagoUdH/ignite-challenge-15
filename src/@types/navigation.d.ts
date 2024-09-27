@@ -8,14 +8,17 @@ export declare global {
             statistics: {
                 generalData: GeneralDataDTO;
             };
-            newMeal: undefined;
+            newEditMeal: {
+                date: string;
+                meal: MealDTO;
+            } | undefined;
             success: {
                 inDiet: boolean;
             };
             meal: {
                 date: string;
                 meal: MealDTO;
-            }
+            };
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Button } from "@components/Button";
 import { HeaderForm } from "@components/headers/HeaderForm";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { MealDTO } from "@storage/meal/MealDTO";
 import { ButtonGroup, Container, Content, Data, Description, Icon, Section, Subtitle, Tag, TagText, Title } from "./styles";
 
@@ -10,10 +10,16 @@ type RouteParams = {
 }
 
 export function Meal(){
+  const navigation = useNavigation()
+
   const route = useRoute()
   const { date, meal } = route.params as RouteParams
 
   const formattedDate = date.replace(/\./g, "/")
+
+  function handleEditMeal(){
+    navigation.navigate("newEditMeal", { date, meal })
+  }
 
   return (
     <Container inDiet={meal.inDiet}>
@@ -44,6 +50,7 @@ export function Meal(){
           <Button
             icon="PENCIL"
             title="Editar refeição"
+            onPress={handleEditMeal}
           />
 
           <Button

@@ -20,7 +20,7 @@ export function Home(){
   const navigation = useNavigation()
 
   function handleNewMeal(){
-    navigation.navigate("newMeal")
+    navigation.navigate("newEditMeal")
   }
 
   async function fetchGeneralData() {
