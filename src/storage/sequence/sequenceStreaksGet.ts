@@ -5,7 +5,7 @@ type StreaksAccumulator = {
   bestStreak: number;
 };
 
-export async function sequenceGetStreaks(){
+export async function sequenceStreaksGet(){
   try{
     const storedSequence = await sequenceGet()
 
