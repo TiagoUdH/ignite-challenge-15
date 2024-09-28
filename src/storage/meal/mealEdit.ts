@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { generalDataBeforeEditMeal } from "@storage/general/generalDataBeforeEditMeal";
+import { generalDataAfterMealEdit } from "@storage/general/generalDataAfterMealEdit";
 import { sectionsGetAll } from "@storage/sections/sectionsGetAll";
 import { sequenceAfterEditMeal } from "@storage/sequence/sequenceAfterEditMeal";
 import { SECTIONS_COLLECTION } from "@storage/storageConfig";
@@ -25,7 +25,7 @@ export async function mealEdit(title: string, inDiet: boolean, meal: MealDTO) {
 
     await sequenceAfterEditMeal(meal.id, meal.inDiet)
 
-    await generalDataBeforeEditMeal(inDiet, meal.inDiet)
+    await generalDataAfterMealEdit(inDiet, meal.inDiet)
   }catch(error){
     throw error
   }

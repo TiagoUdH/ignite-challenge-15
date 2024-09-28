@@ -3,7 +3,7 @@ import { sequenceStreaksGet } from "@storage/sequence/sequenceStreaksGet";
 import { GENERAL_DATA_COLLECTION } from "@storage/storageConfig";
 import { generalDataGet } from "./generalDataGet";
 
-export async function generalDataBeforeEditMeal(inDietBefore: boolean, inDietAfter: boolean) {
+export async function generalDataAfterMealEdit(inDietBefore: boolean, inDietAfter: boolean) {
   try{
     const generalDatastored = await generalDataGet()
 
