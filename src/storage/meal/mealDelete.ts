@@ -4,7 +4,7 @@ import { sectionsGetAll } from "@storage/sections/sectionsGetAll"
 import { sequenceAfterDeleteMeal } from "@storage/sequence/sequenceAfterDeleteMeal"
 import { SECTIONS_COLLECTION } from "@storage/storageConfig"
 
-export async function mealGelete(id: string, inDiet: boolean) {
+export async function mealDelete(id: string, inDiet: boolean) {
   try{
     const sectionsStored = await sectionsGetAll()
 

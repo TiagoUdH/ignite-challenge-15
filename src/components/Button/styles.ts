@@ -10,10 +10,12 @@ type TextProps = {
 
 export type ButtonStyleProps = {
   type?: TextStyleProps,
+  inButtonGroup?: boolean
 }
 
 type Props = TextProps & {
   isActive: boolean,
+  inButtonGroup: boolean,
 }
 
 export const Container = styled(TouchableOpacity).attrs<Props>({
@@ -23,6 +25,10 @@ export const Container = styled(TouchableOpacity).attrs<Props>({
   justify-content: center;
   align-items: center;
   gap: 12px;
+
+  ${({ inButtonGroup }) => inButtonGroup && css`
+    flex: 1;
+  `}
 
   padding: 16px 24px;
   background-color: ${({ theme, type, isActive }) => isActive && type === "PRIMARY" ? theme.COLORS["gray-1"] : !isActive && type === "PRIMARY" ? theme.COLORS["gray-2"] : isActive ? theme.COLORS["gray-5"] : "transparent"};

@@ -36,6 +36,7 @@ export const Label = styled.Text`
 
 export const TxtInput = styled(TextInput).attrs<InputProps>(({ theme }) =>({
   cursorColor: theme.COLORS["gray-1"],
+  placeholderTextColor: theme.COLORS["gray-4"]
 }))`
   padding: 14px;
 

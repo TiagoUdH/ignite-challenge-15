@@ -18,7 +18,7 @@ export async function generalDataAfterMealDelete(inDiet: boolean) {
       generalDataStored.outDietAmount--;
     }
 
-    generalDataStored.inDietPercentage = generalDataStored.inDietAmount / generalDataStored.mealAmount;
+    generalDataStored.inDietPercentage = generalDataStored.inDietAmount / generalDataStored.mealAmount * 100;
     generalDataStored.inDiet = generalDataStored.inDietAmount > generalDataStored.outDietAmount;
 
     generalDataStored.currentStreak = currentStreak;

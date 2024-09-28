@@ -13,13 +13,14 @@ import {
 type Props = TouchableOpacityProps & ButtonStyleProps & {
 	title: string;
 	icon?: "PLUS" | "PENCIL" | "TRASH";
+	inButtonGroup?: boolean;
 };
 
-export function Button({ title, icon = undefined, type = "PRIMARY", ...rest }: Props) {
+export function Button({ title, icon = undefined, type = "PRIMARY", inButtonGroup = false, ...rest }: Props) {
 	const [isActive, setIsActive] = useState(false)
 
 	return (
-		<Container type={type} onPressIn={() => setIsActive(true)} onPressOut={() => setIsActive(false)} isActive={isActive} {...rest}>
+		<Container type={type} inButtonGroup={inButtonGroup} onPressIn={() => setIsActive(true)} onPressOut={() => setIsActive(false)} isActive={isActive} {...rest}>
 			{icon === "PLUS" && <PlusIcon />}
 			{icon === "TRASH" && <TrashIcon />}
 			{icon === "PENCIL" && <PencilIcon />}

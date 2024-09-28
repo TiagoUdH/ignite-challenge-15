@@ -94,9 +94,9 @@ export function NewEditMeal(){
           <Input value={description} onChangeText={setDescription} isActive={descriptionInputRef === isActive} inputRef={descriptionInputRef} onFocus={() => setIsActive(descriptionInputRef)} onBlur={() => setIsActive(null)} label="Descrição" multiline numberOfLines={5} textAlignVertical="top" />
 
           <InputGroup>
-            <Input value={date} onChangeText={setDate} isActive={dateInputRef === isActive} inputRef={dateInputRef} onFocus={() => setIsActive(dateInputRef)} onBlur={() => setIsActive(null)} label="Data" inInputGroup />
+            <Input value={date} onChangeText={setDate} placeholder="xx/xx/xxxx" isActive={dateInputRef === isActive} inputRef={dateInputRef} onFocus={() => setIsActive(dateInputRef)} onBlur={() => setIsActive(null)} label="Data" inInputGroup />
 
-            <Input value={hour} onChangeText={setHour} isActive={hourInputRef === isActive} inputRef={hourInputRef} onFocus={() => setIsActive(hourInputRef)} onBlur={() => setIsActive(null)} label="Hora" inInputGroup />
+            <Input value={hour} onChangeText={setHour} placeholder="xx:xx" isActive={hourInputRef === isActive} inputRef={hourInputRef} onFocus={() => setIsActive(hourInputRef)} onBlur={() => setIsActive(null)} label="Hora" inInputGroup />
           </InputGroup>
 
           <View>
